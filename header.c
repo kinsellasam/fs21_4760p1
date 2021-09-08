@@ -5,20 +5,19 @@ typedef struct list_struct{
   struct list_struct *next;
 } log_t;
 
-static log_t *headptr = NULL;
-static log_t *tailptr = NULL;
+//static log_t *headptr = NULL;
+//static log_t *tailptr = NULL;
 
-int addmsg(data_t data){
+int addmsg(const char type, const char *msg){
   return 0;
 }
 
 void clearlog(void){
-  fclose(fopen("log.h", ))
-  return 0;
+  fclose(fopen("log.h", "a+"));
 }
 
-void *getlog(void){
-  return 0;
+char *getlog(void){
+  return NULL;
 }
 
 int savelog(char *filename){

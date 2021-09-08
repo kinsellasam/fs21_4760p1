@@ -1,5 +1,5 @@
-#include <iostream>
 #include <time.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -13,8 +13,8 @@ typedef struct data_struct{
 } data_t;
 
 int addmsg (const char type, const char *msg);
-void clearlog();
-char *getlog();
+void clearlog(void);
+char *getlog(void);
 int savelog(char *filename);
 
 #endif

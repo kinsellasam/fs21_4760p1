@@ -7,10 +7,10 @@ driver : main.o header.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 main.o: main.c header.h
-	$CC $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 header.o: header.c header.h
-	$CC $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 clean:
 	rm -f driver main.o header.o
