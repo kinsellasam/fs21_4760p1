@@ -1,5 +1,9 @@
 #include "header.h"
 
+char iType = 'I';
+char wType = 'W';
+char eType = 'E';
+char fType = 'F';
 
 int main(int argc, char *argv[]){
   clearlog(); //start by clearing the log file
@@ -8,6 +12,13 @@ int main(int argc, char *argv[]){
   int opts;
   int hFlag = 0;
   int tFlag = 0;
+
+  //createing the basic time struct
+  time_t tm;
+  time(&tm);
+  struct tm *tptr = localtime(&tm);
+
+  printf("%.2d:%.2d:%.2d\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec);
 
   while((opts = getopt(argc, argv, "ht:")) != -1){
     switch (opts){
