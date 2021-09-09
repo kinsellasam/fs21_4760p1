@@ -17,9 +17,14 @@ int main(int argc, char *argv[]){
   time_t tm;
   time(&tm);
   struct tm *tptr = localtime(&tm);
+  printf("%.2d:%.2d:%.2d\tStarting Program\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec);
 
-  printf("%.2d:%.2d:%.2d\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec);
+  //check if any arguments are passed
+  if(argc == 1){
+    printf("No arguments were given. Using default variables.\n");
+  }
 
+  //getopt if there are arguments
   while((opts = getopt(argc, argv, "ht:")) != -1){
     switch (opts){
       case 'h':
