@@ -1,9 +1,8 @@
 #include "header.h"
 
-char iType = 'I';
-char wType = 'W';
-char eType = 'E';
-char fType = 'F';
+const char TYPE_ARRAY[4] = {'I','W','E','F'};
+const int LOW_TIME = 0;
+const int HIGH_TIME = 30;
 
 int main(int argc, char *argv[]){
   clearlog(); //start by clearing the log file
@@ -13,11 +12,11 @@ int main(int argc, char *argv[]){
   int hFlag = 0;
   int tFlag = 0;
 
-  //createing the basic time struct
-  time_t tm;
-  time(&tm);
-  struct tm *tptr = localtime(&tm);
-  printf("%.2d:%.2d:%.2d\tStarting Program\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec);
+  char *filenameArr;
+  FILE *fileptr;
+  int fileExists = 0;
+
+
 
   //check if any arguments are passed
   if(argc == 1){
@@ -39,15 +38,15 @@ int main(int argc, char *argv[]){
       case 't':
         tFlag++;
         timeVal = atoi(optarg);
-        if(timeVal < 0 || timeVal > 20){
-          fprintf(stderr, "Option -%c requires an argument [1-20].\n", optopt);
+        if(timeVal < 0 || timeVal > 30){
+          fprintf(stderr, "Option -%c requires an argument [1-30].\n", optopt);
           return -1;
         }
         break;
 
       case '?':
         if(optopt == 't'){
-          fprintf(stderr, "Option -%c requires an argument [1-20].\n", optopt);
+          fprintf(stderr, "Option -%c requires an argument [1-30].\n", optopt);
         }
         else if(isprint(optopt)){
           fprintf(stderr, "Unknown option '-%c'.\n", optopt);
@@ -61,25 +60,44 @@ int main(int argc, char *argv[]){
     }
   }
 
+  //checking for an argument for the file name
   if(optind < argc){
     do{
-      char *filenameArr;
       filenameArr = argv[optind];
 
-      FILE *fileptr;
+      printf("Attempting to open file '%s'\n", filenameArr);
+
       fileptr = fopen(filenameArr, "r");
 
       if(fileptr == NULL){
         printf("File '%s' not found. Exiting.\n", filenameArr);
         return -1;
       }
+      else{
+        printf("Opened file %s\n", filenameArr);
+        fileExists = 1;
+      }
 
     }while(++optind < argc);
   }
+  //end of command line argument handling.
 
+  //showing the user the passed arguments
   printf("The argument array contains:\n");
   for(int i = 1; i < argc; i++){
     printf("%d: %s\n", i, argv[i]);
   }
+
+  //start logging messages
+  //open a predetermined file if one has not been passed.
+  if(fileExists == 0){
+    printf("No file was passed. Opening file 'messages.txt'\n");
+    fileptr = fopen("messages.txt", "r");
+  }
+
+
+
+  //close file and end program
+  fclose(fileptr);
   return 0;
 }

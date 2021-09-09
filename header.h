@@ -4,6 +4,12 @@
 #include <string.h>
 #include <unistd.h>
 #include <ctype.h>
+#include <stdbool.h>
+
+//constan declarations
+extern const char TYPE_ARRAY[4];
+extern const int LOW_TIME;
+extern const int HIGH_TIME;
 
 #ifndef HEADER_H
 #define HEADER_H

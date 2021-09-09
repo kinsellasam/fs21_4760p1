@@ -9,6 +9,15 @@ typedef struct list_struct{
 //static log_t *tailptr = NULL;
 
 int addmsg(const char type, const char *msg){
+  //createing the basic time struct
+  time_t tm;
+  time(&tm);
+  struct tm *tptr = localtime(&tm);
+  printf("%.2d:%.2d:%.2d\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec);
+
+  
+
+
   return 0;
 }
 
