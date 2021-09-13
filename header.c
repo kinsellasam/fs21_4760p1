@@ -13,16 +13,22 @@ int addmsg(const char type, const char *msg){
   time_t tm;
   time(&tm);
   struct tm *tptr = localtime(&tm);
-  printf("%.2d:%.2d:%.2d\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec);
 
-  
+  //open and print to log.h and close
+  FILE *logptr;
+  logptr = fopen("log.h", "a+");
+  fprintf(logptr, "%.2d:%.2d:%.2d\t%c\t%s\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec, type, msg);
+  fclose(logptr);
 
-
+  //print F to terminal
+  if(type == 'F'){
+    printf("%.2d:%.2d:%.2d\t%c\t%s\n", tptr->tm_hour, tptr->tm_min, tptr->tm_sec, type, msg);
+  }
   return 0;
 }
 
 void clearlog(void){
-  fclose(fopen("log.h", "a+"));
+  fclose(fopen("log.h", "w"));
 }
 
 char *getlog(void){

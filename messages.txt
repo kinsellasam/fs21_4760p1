@@ -1,4 +1,7 @@
-I like potatos
+I like potatoes
 There's a snake in my boot
 Drink milk! Don't do drugs!
 Line 4
+Exceeded the number of threads.
+Not enough memory to allocate kernel structures.
+Function not supported on this platform.

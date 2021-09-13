@@ -15,6 +15,7 @@ int main(int argc, char *argv[]){
   char *filenameArr;
   FILE *fileptr;
   int fileExists = 0;
+  char msgType;
 
 
 
@@ -96,6 +97,33 @@ int main(int argc, char *argv[]){
   }
 
 
+  //setup for the actual program
+  char line[1024];
+  int numLines = 0;
+  int randLine;
+
+  //count the lines in the file
+  while (!feof(fileptr)){
+    fgets(line, 1024, fileptr);
+    numLines++;
+  }
+
+  //get a random type and message
+  do{
+    srand(time(0));
+
+    msgType = TYPE_ARRAY[rand() % 4];
+    randLine = rand() % numLines;
+
+    fseek(fileptr, 0, SEEK_SET);
+    for(int i = 0; !feof(fileptr) && i < randLine; i++){
+      fgets(line, 1024, fileptr);
+    }
+
+    addmsg(msgType, line);
+    sleep(1);
+
+  }while(msgType != 'F');
 
   //close file and end program
   fclose(fileptr);

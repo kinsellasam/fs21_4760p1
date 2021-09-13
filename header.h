@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <stdbool.h>
+//#include <vector>
 
 //constan declarations
 extern const char TYPE_ARRAY[4];
